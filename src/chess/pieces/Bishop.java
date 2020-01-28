@@ -5,59 +5,59 @@ import boardgame.Position;
 import chess.ChessPiece;
 import chess.Color;
 
-public class Rook extends ChessPiece {// Torre
+public class Bishop extends ChessPiece {// Bispo
 
-	public Rook(Board board, Color color) {
+	public Bishop(Board board, Color color) {
 		super(board, color);
 	}
 
 	@Override
 	public String toString() {
-		return "R";
+		return "B";
 	}
 
 	public boolean[][] possibleMoves() {
 		boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
 		Position p = new Position(0, 0);
 
-		// above
-		p.setValues(position.getRow() - 1, position.getColumn());// acessando a posição da peça
+		// NW
+		p.setValues(position.getRow() - 1, position.getColumn() - 1);// acessando a posição da peça
 		while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {// enquanto a posição p existir e não
 																				// houver uma peça lá
 			mat[p.getRow()][p.getColumn()] = true;// indica que a peça pode se mover pra cá
-			p.setRow(p.getRow() - 1);
+			p.setValues(p.getRow() - 1, p.getColumn() - 1);
 		}
 
 		if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {// posição existe e tem peça do oponente
 			mat[p.getRow()][p.getColumn()] = true;
 		}
 
-		// left
-		p.setValues(position.getRow(), position.getColumn() - 1);// acessando a posição da peça
+		// NE
+		p.setValues(position.getRow() - 1, position.getColumn() + 1);// acessando a posição da peça
 		while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 			mat[p.getRow()][p.getColumn()] = true;// indica que a peça pode se mover pra cá
-			p.setColumn(p.getColumn() - 1);
+			p.setValues(p.getRow() - 1, p.getColumn() + 1);
 		}
 
 		if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {// posição existe e tem peça do oponente
 			mat[p.getRow()][p.getColumn()] = true;
 		}
 
-		// right
-		p.setValues(position.getRow(), position.getColumn() + 1);// acessando a posição da peça
+		// SE
+		p.setValues(position.getRow() + 1, position.getColumn() + 1);// acessando a posição da peça
 		while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) {
 			mat[p.getRow()][p.getColumn()] = true;// indica que a peça pode se mover pra cá
-			p.setColumn(p.getColumn() + 1);
+			p.setValues(p.getRow() + 1, p.getColumn() + 1);
 		}
 
 		if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {// posição existe e tem peça do oponente/			mat[p.getRow()][p.getColumn()] = true;
 		}
 
-		// below
-		p.setValues(position.getRow() + 1, position.getColumn());// acessando a posição da peça
+		// SW
+		p.setValues(position.getRow() + 1, position.getColumn() - 1);// acessando a posição da peça
 		while (getBoard().positionExists(p) && !getBoard().thereIsAPiece(p)) { 
 			mat[p.getRow()][p.getColumn()] = true;// indica que a peça pode se mover pra cá
-			p.setRow(p.getRow() + 1);
+			p.setValues(p.getRow() + 1, p.getColumn() - 1);
 		}
 
 		if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {// posição existe e tem peça do oponente
@@ -67,3 +67,4 @@ public class Rook extends ChessPiece {// Torre
 		return mat;
 	}
 }
+
